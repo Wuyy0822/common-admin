@@ -8,21 +8,22 @@
         var $wrapper = $('.page-container'); //获取Table的外部容器
         var $table = $('.table-sort'); //获取Table
 
-        console.log($.fn.dataTable.defaults);
+        //console.log($.fn.dataTable.defaults);
 
+        var returnData = {};
         var settings = $.extend(true,$.fn.dataTable.defaults,opts,CONSTANT.DATA_TABLES.DEFAULT_OPTION,{
             ajax:function(data, callback, settings){ //ajax配置为function,手动调用异步查询
+                //console.log(data);
                 //手动控制遮罩
                 $wrapper.spinModal({color: '#000',shadow:true});
                 $.ajax({
                     type: "GET",
                     url: opts.url,
-                    data:{fuzzy:true,startIndex:1,pageSize:10},
+                    data:{draw:data.draw,pageSize:data.length},
                     dataType: "json",
                     success:function(result){
                         setTimeout(function(){
                             //封装返回数据，这里仅演示了修改属性名
-                            var returnData = {};
                             returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
                             returnData.recordsTotal = result.total;
                             returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
@@ -44,10 +45,14 @@
             serverSide: true,
             initComplete:function(){
                 $('.table-sort tbody tr').addClass("text-c");
+                $("#totalNum").html(returnData.recordsTotal);
             }
+
         });
 
         var _table = $table.dataTable(settings).api();
+
+
 
         //行点击事件
         $("tbody",$table).on("click","tr",function(event) {

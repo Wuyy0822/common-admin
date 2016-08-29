@@ -28,7 +28,7 @@
 				<i class="Hui-iconfont">&#xe600;</i> 添加用户
 			</a>
 		</span>
-		<span class="r">共有数据：<strong>88</strong> 条</span>
+		<span class="r">共有数据：<strong id="totalNum"></strong> 条</span>
 	</div>
 
 	<div class="mt-20">
@@ -36,14 +36,13 @@
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th>姓名</th>
-				<th>职位</th>
+				<th>用户名</th>
+				<th>昵称</th>
 				<th>状态</th>
-				<th>入职时间</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="text-c">
 
 		</tbody>
 	</table>
@@ -63,12 +62,12 @@ $(function(){
 			CONSTANT.DATA_TABLES.COLUMN.CHECKBOX,
 			{
 				className : "ellipsis",	//文字过长时用省略号显示，CSS实现
-				data: "name",
+				data: "username",
 				render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS,//会显示省略号的列，需要用title属性实现划过时显示全部文本的效果
 			},
 			{
 				className : "ellipsis",
-				data: "position",
+				data: "nickname",
 				render : CONSTANT.DATA_TABLES.RENDER.ELLIPSIS,
 				//固定列宽，但至少留下一个活动列不要固定宽度，让表格自行调整。不要将所有列都指定列宽，否则页面伸缩时所有列都会随之按比例伸缩。
 				//切记设置table样式为table-layout:fixed; 否则列宽不会强制为指定宽度，也不会出现省略号。
@@ -80,10 +79,6 @@ $(function(){
 				render : function(data,type, row, meta) {
 					return '<i class="fa fa-male"></i> '+(data?"在线":"离线");
 				}
-			},
-			{
-				data : "start_date",
-				width : "80px"
 			},
 			{
 				className : "td-manage",
@@ -99,7 +94,7 @@ $(function(){
 				}
 			}
 		],
-		url:"${pageContext.request.contextPath}/resources/datasource.jsp",
+		url:"${pageContext.request.contextPath}/user/list",
 		pagingType: "full_numbers",
 	}
 	$.fn.ajaxTable(opts);

@@ -9,10 +9,12 @@ import com.panlingxiao.common_admin.message.request.user.UserRequest;
 import com.panlingxiao.common_admin.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by panlingxiao on 2016/8/30.
  */
+@Transactional
 @Service
 public class UserServiceImpl implements UserService{
 

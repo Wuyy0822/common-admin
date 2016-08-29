@@ -24,7 +24,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/static/h-ui.admin/css/style.css" />
 <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lib/datatables/plugins/integration/bootstrap/2/dataTables.bootstrap.css">--%>
 
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datatable.css"/>
 
 
