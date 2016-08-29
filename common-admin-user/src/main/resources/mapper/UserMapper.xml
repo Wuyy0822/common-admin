@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panlingxiao.common_admin.mapper.user.UserMapper">
+
+
+    <sql id="common-user-sql">
+        id,username,password,nickname,status
+    </sql>
+
+    <select id="findUser" parameterType="userRequest" resultType="user">
+        select <include refid="common-user-sql"/> from tb_user
+    </select>
+
+    <insert id="addUser" parameterType="user">
+        insert into tb_user (<include refid="common-user-sql"/>)  values (#{id},#{username},#{password},#{nickname},#{status})
+    </insert>
+	
+</mapper>
