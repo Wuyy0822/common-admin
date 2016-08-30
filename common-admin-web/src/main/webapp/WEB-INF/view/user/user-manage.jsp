@@ -13,13 +13,16 @@
 </nav>
 
 <div class="page-container">
-	<div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate radius" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate radius" style="width:120px;">
-		<input type="text" class="input-text radius" style="width:250px" placeholder="输入会员名称、电话、邮箱"  name="">
-		<button type="submit" class="btn btn-success radius"  name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div>
+
+	<form action="" method="post" class="form form-horizontal search-form">
+		<div class="text-c"> 日期范围：
+			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate radius" style="width:120px;">
+			-
+			<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate radius" style="width:120px;">
+			<input type="text" class="input-text radius" style="width:250px" placeholder="输入会员名称、电话、邮箱"  name="">
+			<button type="submit" class="btn btn-success radius"  name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</div>
+	</form>
 
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
@@ -96,7 +99,7 @@ $(function(){
 		],
 		url:"${pageContext.request.contextPath}/user/list",
 		pagingType: "full_numbers",
-	}
+	};
 	$.fn.ajaxTable(opts);
 
 

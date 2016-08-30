@@ -11,15 +11,27 @@
         //console.log($.fn.dataTable.defaults);
 
         var returnData = {};
+
+        //分页的基本参数
+        var param = {draw:data.draw,pageSize:data.length,start:data.start};
+        //遍历表单的输入框,组成请求参数
+        $(".search-form input").each(function(i){
+            var val = $(this).val();
+            if(val != null && $.trim(val) != ""){
+                param[$(this).attr("name")] = $(this).val();
+            }
+        });
+
+
         var settings = $.extend(true,$.fn.dataTable.defaults,opts,CONSTANT.DATA_TABLES.DEFAULT_OPTION,{
             ajax:function(data, callback, settings){ //ajax配置为function,手动调用异步查询
                 //console.log(data);
                 //手动控制遮罩
                 $wrapper.spinModal({color: '#000',shadow:true});
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: opts.url,
-                    data:{draw:data.draw,pageSize:data.length},
+                    data:param,
                     dataType: "json",
                     success:function(result){
                         setTimeout(function(){

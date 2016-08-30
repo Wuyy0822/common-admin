@@ -25,7 +25,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/h-ui/js/H-ui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/h-ui.admin/js/H-ui.admin.js"></script>
-    <!-- SpinJS-->
     <script src="${pageContext.request.contextPath}/resources/lib/spin-2.1.0/jquery.spin.merge.js"></script>
 
     <decorator:body/>
