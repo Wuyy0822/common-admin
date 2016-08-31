@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ include file="/WEB-INF/common/common-tag.jsp"%>
 
 <html>
 <head>
@@ -26,7 +26,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/h-ui/js/H-ui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/static/h-ui.admin/js/H-ui.admin.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/spin-2.1.0/jquery.spin.merge.js"></script>
-
+    <script src="${pageContext.request.contextPath}/resources/js/constant.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/datatable-plugin.js"></script>
     <decorator:body/>
 
 </body>

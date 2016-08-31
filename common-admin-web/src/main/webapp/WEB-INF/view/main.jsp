@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>H-ui.admin v1.0</title>
+<title>管理系统通用模板 V1.0</title>
 </head>
 
 <body>

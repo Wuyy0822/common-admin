@@ -24,7 +24,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/static/h-ui.admin/css/style.css" />
 <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lib/datatables/plugins/integration/bootstrap/2/dataTables.bootstrap.css">--%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datatable.css"/>
-
+<!-- DataTables CSS start-->
 
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>

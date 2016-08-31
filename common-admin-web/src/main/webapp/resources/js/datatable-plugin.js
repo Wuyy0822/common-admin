@@ -12,20 +12,23 @@
 
         var returnData = {};
 
-        //分页的基本参数
-        var param = {draw:data.draw,pageSize:data.length,start:data.start};
-        //遍历表单的输入框,组成请求参数
-        $(".search-form input").each(function(i){
-            var val = $(this).val();
-            if(val != null && $.trim(val) != ""){
-                param[$(this).attr("name")] = $(this).val();
-            }
-        });
+
 
 
         var settings = $.extend(true,$.fn.dataTable.defaults,opts,CONSTANT.DATA_TABLES.DEFAULT_OPTION,{
             ajax:function(data, callback, settings){ //ajax配置为function,手动调用异步查询
                 //console.log(data);
+                //分页的基本参数
+
+                var param = {draw:data.draw,pageSize:data.length,startIndex:data.start};
+                //遍历表单的输入框,组成请求参数
+                $(".search-form input").each(function(){
+                    var val = $(this).val();
+                    if(val != null && $.trim(val) != ""){
+                        param[$(this).attr("name")] = $(this).val();
+                    }
+                });
+
                 //手动控制遮罩
                 $wrapper.spinModal({color: '#000',shadow:true});
                 $.ajax({
@@ -56,10 +59,12 @@
             columns: opts.columns,
             serverSide: true,
             initComplete:function(){
-                $('.table-sort tbody tr').addClass("text-c");
+                //$('.table-sort tbody tr').addClass("text-c");
                 $("#totalNum").html(returnData.recordsTotal);
+            },"drawCallback": function( settings ) {
+                //渲染完毕后的回调
+                $(".paginate_button").addClass("radius");
             }
-
         });
 
         var _table = $table.dataTable(settings).api();

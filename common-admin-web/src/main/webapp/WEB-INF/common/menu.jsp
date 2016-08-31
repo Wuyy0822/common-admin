@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Administrator
+  User: panlignxiao
   Date: 2016/8/30
   Time: 2:09
   To change this template use File | Settings | File Templates.
@@ -9,6 +9,34 @@
 <aside class="Hui-aside">
   <input runat="server" id="divScrollValue" type="hidden" value="" />
   <div class="menu_dropdown bk_2">
+
+    <dl id="menu-member">
+      <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+      <dd>
+        <ul>
+          <li><a _href="${pageContext.request.contextPath}/user/manage" data-title="用户列表" href="javascript:;">用户列表</a></li>
+          <li><a _href="member-del.html" data-title="删除的用户" href="javascript:;">删除的用户</a></li>
+          <li><a _href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
+          <li><a _href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
+          <li><a _href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
+          <li><a _href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
+          <li><a _href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
+        </ul>
+      </dd>
+    </dl>
+
+    <dl id="menu-product">
+      <dt><i class="Hui-iconfont">&#xe620;</i>商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+      <dd>
+        <ul>
+          <li><a _href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+          <li><a _href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
+          <li><a _href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+        </ul>
+      </dd>
+    </dl>
+
+
     <dl id="menu-article">
       <dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
       <dd>
@@ -25,16 +53,11 @@
         </ul>
       </dd>
     </dl>
-    <dl id="menu-product">
-      <dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-      <dd>
-        <ul>
-          <li><a _href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
-          <li><a _href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-          <li><a _href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
-        </ul>
-      </dd>
-    </dl>
+
+
+
+
+
     <dl id="menu-comments">
       <dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
       <dd>
@@ -44,20 +67,8 @@
         </ul>
       </dd>
     </dl>
-    <dl id="menu-member">
-      <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-      <dd>
-        <ul>
-          <li><a _href="${pageContext.request.contextPath}/user/manage" data-title="用户列表" href="javascript:;">用户列表</a></li>
-          <li><a _href="member-del.html" data-title="删除的用户" href="javascript:;">删除的用户</a></li>
-          <li><a _href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
-          <li><a _href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
-          <li><a _href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
-          <li><a _href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-          <li><a _href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
-        </ul>
-      </dd>
-    </dl>
+
+
     <dl id="menu-admin">
       <dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
       <dd>

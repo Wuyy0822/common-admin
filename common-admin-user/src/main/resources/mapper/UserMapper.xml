@@ -8,11 +8,19 @@
     </sql>
 
     <select id="findUser" parameterType="userRequest" resultType="user">
-        select <include refid="common-user-sql"/> from tb_user
+        select
+        <include refid="common-user-sql"/>
+        from tb_user as a
+        <where>
+            <if test="param != null and param != '' ">
+                a.username like '%${param}%' or a.nickname like '%${param}%'
+            </if>
+        </where>
     </select>
 
     <insert id="addUser" parameterType="user">
-        insert into tb_user (<include refid="common-user-sql"/>)  values (#{id},#{username},#{password},#{nickname},#{status})
+        insert into tb_user (<include refid="common-user-sql"/>) values
+        (#{id},#{username},#{password},#{nickname},#{status})
     </insert>
-	
+
 </mapper>

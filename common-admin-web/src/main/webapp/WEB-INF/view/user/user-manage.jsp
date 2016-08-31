@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/common/common-tag.jsp"%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <title>用户管理</title>
@@ -14,15 +16,26 @@
 
 <div class="page-container">
 
-	<form action="" method="post" class="form form-horizontal search-form">
-		<div class="text-c"> 日期范围：
-			<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate radius" style="width:120px;">
-			-
-			<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate radius" style="width:120px;">
-			<input type="text" class="input-text radius" style="width:250px" placeholder="输入会员名称、电话、邮箱"  name="">
-			<button type="submit" class="btn btn-success radius"  name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+
+
+		<div class="text-c">
+			<form:form  cssClass="form form-horizontal search-form" modelAttribute="userRequest">
+
+				<%--日期范围：--%>
+				<%--<form:input path="startTime" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin"--%>
+							<%--cssClass="input-text Wdate radius" cssStyle="width:120px;"/> ---%>
+				<%--<form:input path="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax"--%>
+							<%--cssClass="input-text Wdate radius" cssStyle="width:120px;"/>--%>
+
+				<form:input path="param"  placeholder="输入用户名、用户昵称" cssStyle="width:250px" cssClass="input-text radius"/>
+				<input type="hidden" name="refresh" value="true"/>
+				<button type="submit" class="btn btn-success radius"  name="">
+					<i class="Hui-iconfont">&#xe665;</i> 搜用户
+				</button>
+
+			</form:form>
+
 		</div>
-	</form>
 
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
@@ -45,16 +58,13 @@
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-		<tbody class="text-c">
+		<tbody >
 
 		</tbody>
 	</table>
 	</div>
 </div>
 
-
-<script src="${pageContext.request.contextPath}/resources/js/constant.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/datatable-plugin.js"></script>
 
 
 <script type="text/javascript">
@@ -80,7 +90,7 @@ $(function(){
 				data : "status",
 				width : "80px",
 				render : function(data,type, row, meta) {
-					return '<i class="fa fa-male"></i> '+(data?"在线":"离线");
+					return '<i class="Hui-iconfont">&#xe62c;</i> '+(data?"在线":"离线");
 				}
 			},
 			{
@@ -99,6 +109,16 @@ $(function(){
 		],
 		url:"${pageContext.request.contextPath}/user/list",
 		pagingType: "full_numbers",
+		//行渲染回调,在这里可以对该行dom元素进行任何操作
+		//给当前行加样式
+		"createdRow": function ( row, data, index ) {
+			$(row).addClass("text-c");
+			if (data.role) {
+				$(row).addClass("info");
+			}
+			//给当前行某列加样式
+			$('td', row).eq(3).addClass(data.status?"text-success":"text-error");
+		}
 	};
 	$.fn.ajaxTable(opts);
 

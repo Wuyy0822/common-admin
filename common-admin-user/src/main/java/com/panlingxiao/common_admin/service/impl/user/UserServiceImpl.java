@@ -16,22 +16,25 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
 
     @Override
     public PageInfo<User> findUser(UserRequest userRequest) {
-        PageHelper.startPage(userRequest.getDraw(),userRequest.getPageSize());
+        /*
+         * 由于前端传递的参数查询的偏移量和每页的大小
+         * 这里需要重新计算这是第几页,通过Mybatis分页插件简化处理
+         * 并且默认为第一页开始查询
+         */
+        PageHelper.startPage((userRequest.getStartIndex() / userRequest.getPageSize())+1, userRequest.getPageSize());
         Page<User> users = userMapper.findUser(userRequest);
-
         PageInfo<User> pageInfo = new PageInfo<User>(users);
-        pageInfo.setTotal(users.getTotal());
-        pageInfo.setPages(users.getPages());
-        pageInfo.setPageNum(users.getPageNum());
         return pageInfo;
     }
+
+
 
     @Override
     public void addUser(User user) {
