@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> list(@ModelAttribute(USER_REQUEST) UserRequest request) {
         if (log.isDebugEnabled()) {
-            log.debug("用户列表请求参数:{}", request);
+            log.debug(" 鐢ㄦ埛璇锋眰鍙傛暟:{}", request);
         }
         PageInfo<User> pageInfo = userService.findUser(request);
         HashMap<String, Object> map = new HashMap<>();

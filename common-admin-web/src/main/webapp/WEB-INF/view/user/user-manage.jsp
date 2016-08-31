@@ -22,10 +22,10 @@
 			<form:form  cssClass="form form-horizontal search-form" modelAttribute="userRequest">
 
 				<%--日期范围：--%>
-				<%--<form:input path="startTime" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin"--%>
-							<%--cssClass="input-text Wdate radius" cssStyle="width:120px;"/> ---%>
-				<%--<form:input path="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax"--%>
-							<%--cssClass="input-text Wdate radius" cssStyle="width:120px;"/>--%>
+				<form:input path="startTime" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin"
+							cssClass="input-text Wdate radius" cssStyle="width:120px;"/> -
+				<form:input path="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax"
+							cssClass="input-text Wdate radius" cssStyle="width:120px;"/>
 
 				<form:input path="param"  placeholder="输入用户名、用户昵称" cssStyle="width:250px" cssClass="input-text radius"/>
 				<input type="hidden" name="refresh" value="true"/>

@@ -14,13 +14,18 @@
 
 
 
-
         var settings = $.extend(true,$.fn.dataTable.defaults,opts,CONSTANT.DATA_TABLES.DEFAULT_OPTION,{
             ajax:function(data, callback, settings){ //ajax配置为function,手动调用异步查询
                 //console.log(data);
                 //分页的基本参数
 
                 var param = {draw:data.draw,pageSize:data.length,startIndex:data.start};
+
+                //判断用户是否传递表单的ID,如果有则使用用户传递的formId,否则则使用默认的formId
+                var formId = opts.hasOwnProperty("formId") ? opts.formId : "search-form";
+
+                //console.log(formId);
+
                 //遍历表单的输入框,组成请求参数
                 $(".search-form input").each(function(){
                     var val = $(this).val();
