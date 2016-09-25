@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * Created by panlingxiao on 2016/8/29.
  */
@@ -31,10 +33,43 @@ public class User {
      */
     private String nickname;
 
+
     /**
      * 用户状态
      */
     private boolean status;
+
+    /**
+     *  加密密码的盐值
+     */
+    private String salt;
+
+    /**
+     * 用户是否锁定
+     */
+    private boolean locked;
+
+    /**
+     * 用户具备的角色列表
+     */
+    private List<Integer> roleIds;
+
+
+    public String getRoleIdsString(){
+        if(roleIds == null || roleIds.isEmpty()){
+            return null;
+        }
+        StringBuilder builder = new StringBuilder();
+
+        final int size = roleIds.size();
+        for(int i = 0;i < size;i++){
+            builder.append(roleIds.get(i));
+            if(i != size - 1){
+                builder.append(",");
+            }
+        }
+        return builder.toString();
+    }
 
 
 

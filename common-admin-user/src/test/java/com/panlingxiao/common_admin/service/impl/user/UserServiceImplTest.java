@@ -4,11 +4,17 @@ import com.github.pagehelper.PageInfo;
 import com.panlingxiao.common_admin.domain.User;
 import com.panlingxiao.common_admin.message.request.user.UserRequest;
 import com.panlingxiao.common_admin.service.user.UserService;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,15 +31,42 @@ public class UserServiceImplTest {
 
     @Test
     public void testAddUser() {
-        for (int i = 0; i < 100; i++) {
-            User user = new User();
-            user.setUsername("hello:" + i);
-            user.setPassword("pwd:" + i);
-            user.setNickname("nickname:" + i);
-            userService.addUser(user);
-        }
+        User user = new User();
+        user.setUsername("zs");
+        user.setNickname("张三");
+        user.setPassword("123");
+        user.setRoleIds(Arrays.asList(1, 2, 3));
+        userService.addUser(user);
     }
 
+    @Test
+    public void testPassword() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+        hashedCredentialsMatcher.setHashIterations(2);
+        UsernamePasswordToken token = new UsernamePasswordToken("zs", "123");
+        User user = userService.getUserById(5);
+        System.out.println(user.getSalt());
+        boolean result =hashedCredentialsMatcher.doCredentialsMatch(token, new SimpleAuthenticationInfo("zs", user.getPassword(), ByteSource.Util.bytes(user.getUsername() + user.getSalt()), "abc"));
+        System.out.println(result);
+    }
+
+    /**
+     * 根据用户Id查询用户
+     */
+    @Test
+    public void testGetUserById() {
+        User user = userService.getUserById(2);
+        System.out.println(user.getRoleIds());
+    }
+
+    @Test
+    public void testGetUserByUserName() {
+        UserRequest userRequest = new UserRequest();
+        userRequest.setUsername("zs");
+        User user = userService.login(userRequest);
+        System.out.println(user.getRoleIds());
+    }
 
     /**
      * 参考PageHelper的单元测试
@@ -61,7 +94,6 @@ public class UserServiceImplTest {
         assertEquals(false, pageInfo.isIsLastPage());
         assertEquals(false, pageInfo.isHasPreviousPage());
         assertEquals(true, pageInfo.isHasNextPage());
-
 
 
         //查询第二页数据
@@ -99,7 +131,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void testFindUserByParam(){
+    public void testFindUserByParam() {
         UserRequest userRequest = new UserRequest();
         userRequest.setStartIndex(0);
         userRequest.setPageSize(10);

@@ -4,13 +4,13 @@
 
 
     <sql id="common-user-sql">
-        id,username,password,nickname,status
+        id,username,password,nickname,status,salt,locked,role_ids
     </sql>
 
-    <select id="findUser" parameterType="userRequest" resultType="user">
+    <select id="findUser" parameterType="userRequest" resultMap="userMap">
         select
         <include refid="common-user-sql"/>
-        from tb_user as a
+        from t_user as a
         <where>
             <if test="param != null and param != '' ">
                 a.username like '%${param}%' or a.nickname like '%${param}%'
@@ -18,9 +18,43 @@
         </where>
     </select>
 
+    <!--根据用户Id查询用户-->
+    <select id="getUserById" parameterType="Integer" resultMap="userMap">
+        select
+        <include refid="common-user-sql"/>
+        from t_user
+        <where>
+            id=#{id}
+        </where>
+    </select>
+
+    <!--根据用户名查询用户-->
+    <select id="getUserByUserName" parameterType="userRequest" resultMap="userMap">
+        select
+        <include refid="common-user-sql"/>
+        from t_user
+        <where>
+            username=#{username}
+        </where>
+    </select>
+
+    <resultMap id="userMap" type="user">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="status" property="status"/>
+        <result column="salt" property="salt"/>
+        <result column="locked" property="locked"/>
+        <!--使用自定义的Type处理器来完成1，2，3字符串到List<Integer>的转换过程-->
+        <result column="role_ids" property="roleIds"  typeHandler="com.panlingxiao.common_admin.util.mybatis.StringToListTypeHandler" />
+    </resultMap>
+
+    <!--添加用户-->
     <insert id="addUser" parameterType="user">
-        insert into tb_user (<include refid="common-user-sql"/>) values
-        (#{id},#{username},#{password},#{nickname},#{status})
+        insert into t_user (<include refid="common-user-sql"/>) values
+        (#{id},#{username},#{password},#{nickname},#{status},#{salt},#{locked},#{roleIdsString})
     </insert>
+
 
 </mapper>

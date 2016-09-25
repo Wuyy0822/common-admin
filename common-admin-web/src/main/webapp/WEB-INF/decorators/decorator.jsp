@@ -12,9 +12,11 @@
 <head>
   <!--加载通用的样式文件和CSS文件-->
   <jsp:include page="/WEB-INF/common/header.jsp"/>
+    <decorator:head/>
     <title>
         <decorator:title/>
     </title>
+
 </head>
 <body>
     <!--加载通用的JS文件-->

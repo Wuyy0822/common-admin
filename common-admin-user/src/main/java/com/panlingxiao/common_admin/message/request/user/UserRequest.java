@@ -20,4 +20,8 @@ public class UserRequest extends CommonRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
+    private String username;
+
+    private String password;
+
 }
