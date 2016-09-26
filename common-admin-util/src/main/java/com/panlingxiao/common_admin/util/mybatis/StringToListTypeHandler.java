@@ -24,12 +24,18 @@ public class StringToListTypeHandler extends BaseTypeHandler<List>{
     @Override
     public List getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String strVal = rs.getString(columnName);
+        if(strVal == null ){
+            return null;
+        }
         return Arrays.asList(strVal.split(","));
     }
 
     @Override
     public List getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String strVal = rs.getString(columnIndex);
+        if(strVal == null ){
+            return null;
+        }
         return Arrays.asList(strVal.split(","));
     }
 

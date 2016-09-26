@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<context:component-scan base-package="com.panlingxiao.common_admin.controller"/>
+	<context:component-scan base-package="com.panlingxiao.common_admin.web.controller"/>
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven>
 	</mvc:annotation-driven>
@@ -24,4 +24,15 @@
 	</bean>
 
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
+
+
+	<!--启用Shiro注解-->
+	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+	<!-- the lifecycleBeanProcessor has run: -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
+
+
 </beans>

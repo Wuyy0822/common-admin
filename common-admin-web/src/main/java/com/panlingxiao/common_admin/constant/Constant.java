@@ -6,4 +6,6 @@ package com.panlingxiao.common_admin.constant;
 public interface Constant {
 
     String REDIRECT = "redirect:";
+
+    String CURRENT_USER = "user";
 }

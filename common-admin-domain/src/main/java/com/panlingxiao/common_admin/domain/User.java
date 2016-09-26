@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by panlingxiao on 2016/8/29.
@@ -53,6 +54,10 @@ public class User {
      * 用户具备的角色列表
      */
     private List<Integer> roleIds;
+
+    private Set<Role> roles;
+
+    private Set<Resource> resources;
 
 
     public String getRoleIdsString(){

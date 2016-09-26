@@ -3,7 +3,7 @@ delete from t_user;
 delete from t_role;
 delete from t_resource;
 
-insert into t_user values(1,'admin','d3c59d25033dbf980d29554025c23a75','系统管理员','8d78869f470951332959580424d4bf4f', '1', false);
+insert into t_user values(1,'admin','d3c59d25033dbf980d29554025c23a75','admin',false,'8d78869f470951332959580424d4bf4f', '1', false);
 insert into t_resource values(1, '资源', 'menu', '', 0, '0/', '', true);
 
 insert into t_resource values(11, '组织机构管理', 'menu', '/organization', 1, '0/1/', 'organization:*', true);

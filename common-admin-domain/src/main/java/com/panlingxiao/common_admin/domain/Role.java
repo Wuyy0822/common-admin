@@ -22,7 +22,7 @@ public class Role {
      */
     private String name;
     /**
-     *  角色描述,UI界面显示使用
+     * 角色描述,UI界面显示使用
      */
     private String description;
     /**
@@ -33,4 +33,10 @@ public class Role {
      * 是否可用,如果不可用将不会添加给用户
      */
     private Boolean available = Boolean.FALSE;
+
+    /**
+     * 具体的资源
+     */
+    private List<Resource> resources;
+
 }

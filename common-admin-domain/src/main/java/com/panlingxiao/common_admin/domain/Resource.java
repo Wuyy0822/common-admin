@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by panlingxiao on 2016/9/25.
  */
@@ -35,7 +38,7 @@ public class Resource {
     /**
      *  父编号
      */
-    private Long parentId;
+    private Integer parentId;
 
     /**
      * 父编号列表
@@ -43,6 +46,25 @@ public class Resource {
     private String parentIds;
 
     private Boolean available = Boolean.FALSE;
+
+    private List<Resource> children;
+
+    /**
+     * 资源的级别,只针对菜单有效
+     */
+    private int level;
+
+    /**
+     * 菜单显示的顺序
+     */
+    private int position;
+
+    public void addChildren(Resource resource) {
+        if(children == null){
+            children = new ArrayList<>();
+        }
+        children.add(resource);
+    }
 
     public static enum ResourceType {
         menu("菜单"), button("按钮");

@@ -27,4 +27,9 @@ public interface UserService {
      */
     public User login(UserRequest userRequest);
 
+    /**
+     * 获取用户的授权信息
+     * @param userRequest
+     */
+    User getUserAuthorizationInfo(UserRequest userRequest);
 }

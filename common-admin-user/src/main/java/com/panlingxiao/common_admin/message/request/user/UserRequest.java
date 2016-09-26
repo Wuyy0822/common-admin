@@ -24,4 +24,5 @@ public class UserRequest extends CommonRequest {
 
     private String password;
 
+    private Integer id;
 }

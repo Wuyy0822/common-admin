@@ -1,9 +1,10 @@
-package com.panlingxiao.common_admin.controller;
+package com.panlingxiao.common_admin.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.panlingxiao.common_admin.domain.User;
 import com.panlingxiao.common_admin.message.request.user.UserRequest;
 import com.panlingxiao.common_admin.service.user.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,8 @@ public class UserController {
      * @param userRequest
      * @return
      */
-    @RequestMapping(value = "/manage")
+    @RequestMapping(value = "/list/view")
+    @RequiresPermissions("user:list:view")
     public String manage(boolean refresh, Model model, @ModelAttribute(USER_REQUEST) UserRequest userRequest) {
         if (!refresh) {
             model.addAttribute(USER_REQUEST, new UserRequest());

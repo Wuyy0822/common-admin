@@ -44,16 +44,11 @@
 
        <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-       <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
-       <!-- the lifecycleBeanProcessor has run: -->
-       <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-       <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-              <property name="securityManager" ref="securityManager"/>
-       </bean>
 
        <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="hashedCredentialsMatcher">
               <property name="hashAlgorithmName" value="${password.algorithmName}"/>
               <property name="hashIterations" value="${password.hashIterations}"/>
        </bean>
+
 
 </beans>

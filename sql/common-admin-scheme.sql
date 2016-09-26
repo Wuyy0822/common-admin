@@ -38,8 +38,14 @@ create table t_resource (
   parent_ids varchar(100),
   permission varchar(100),
   available bool default false,
+  level int,
+  position int,
   constraint pk_t_resource primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 create index idx_t_resource_parent_id on t_resource(parent_id);
 create index idx_t_resource_parent_ids on t_resource(parent_ids);
+
+
+
+
 

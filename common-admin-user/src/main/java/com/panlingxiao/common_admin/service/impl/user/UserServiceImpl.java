@@ -3,6 +3,8 @@ package com.panlingxiao.common_admin.service.impl.user;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.panlingxiao.common_admin.domain.Resource;
+import com.panlingxiao.common_admin.domain.Role;
 import com.panlingxiao.common_admin.domain.User;
 import com.panlingxiao.common_admin.mapper.user.UserMapper;
 import com.panlingxiao.common_admin.message.request.user.UserRequest;
@@ -12,6 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by panlingxiao on 2016/8/30.
@@ -60,4 +67,36 @@ public class UserServiceImpl implements UserService {
     public User login(UserRequest userRequest) {
         return userMapper.getUserByUserName(userRequest);
     }
+
+    @Override
+    public User getUserAuthorizationInfo(UserRequest userRequest) {
+        User user = userMapper.getUserAuthorizationInfoById(userRequest.getId());
+        Map<Integer,Resource> resourceMap = new HashMap();
+        if(user != null) {
+           Set<Role> roles = user.getRoles();
+            for(Role role : roles){
+                List<Resource> resources = role.getResources();
+                for(Resource resource : resources){
+                    if(resource.getType() == Resource.ResourceType.menu){
+                        Integer parentId = resource.getParentId();
+                        //判断一级菜单是否存在
+                        if(parentId == null || parentId <=0){
+                            Integer id = resource.getId();
+                            if(!resourceMap.containsKey(id)){
+                                resourceMap.put(id,resource);
+                            }
+                        }else if(resourceMap.containsKey(parentId)){
+                            Resource parent = resourceMap.get(parentId);
+                            parent.addChildren(resource);
+                        }else{
+
+                        }
+                    }
+                }
+            }
+        }
+        return user;
+    }
+
+
 }

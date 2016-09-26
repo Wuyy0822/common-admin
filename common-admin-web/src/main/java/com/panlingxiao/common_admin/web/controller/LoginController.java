@@ -1,4 +1,4 @@
-package com.panlingxiao.common_admin.controller;
+package com.panlingxiao.common_admin.web.controller;
 
 import com.panlingxiao.common_admin.constant.Constant;
 import com.panlingxiao.common_admin.message.request.user.UserRequest;

@@ -73,6 +73,9 @@ function Hui_admin_tab(obj){
 			var iframe_box=topWindow.find("#iframe_box");
 			iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src",_href);
 		}
+	}else{
+		console.log($(obj).siblings("ul").is(":visible"));
+		$(obj).siblings("ul").slideToggle();
 	}
 
 }
@@ -183,6 +186,10 @@ $(function(){
 	});
 	/*左侧菜单*/
 	$.Huifold(".menu_dropdown dl dt",".menu_dropdown dl dd","fast",1,"click");
+
+
+
+
 	/*选项卡导航*/
 
 	$(".Hui-aside").on("click",".menu_dropdown a",function(){

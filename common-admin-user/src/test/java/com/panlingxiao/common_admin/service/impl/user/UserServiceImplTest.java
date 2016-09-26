@@ -1,6 +1,7 @@
 package com.panlingxiao.common_admin.service.impl.user;
 
 import com.github.pagehelper.PageInfo;
+import com.panlingxiao.common_admin.domain.Role;
 import com.panlingxiao.common_admin.domain.User;
 import com.panlingxiao.common_admin.message.request.user.UserRequest;
 import com.panlingxiao.common_admin.service.user.UserService;
@@ -15,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -66,6 +68,20 @@ public class UserServiceImplTest {
         userRequest.setUsername("zs");
         User user = userService.login(userRequest);
         System.out.println(user.getRoleIds());
+    }
+
+    /**
+     * 获取用户的授权信息
+     */
+    @Test
+    public void testGetUserAuthorizationInfo(){
+        UserRequest userRequest = new UserRequest();
+        userRequest.setId(1);
+        User user = userService.getUserAuthorizationInfo(userRequest);
+        Set<Role> roles = user.getRoles();
+        for(Role role : roles){
+            System.out.println(role);
+        }
     }
 
     /**
