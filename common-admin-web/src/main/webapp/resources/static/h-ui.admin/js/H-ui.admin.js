@@ -74,7 +74,7 @@ function Hui_admin_tab(obj){
 			iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src",_href);
 		}
 	}else{
-		console.log($(obj).siblings("ul").is(":visible"));
+		//console.log($(obj).siblings("ul").is(":visible"));
 		$(obj).siblings("ul").slideToggle();
 	}
 

@@ -3,8 +3,8 @@
 <mapper namespace="com.panlingxiao.common_admin.mapper.user.ResourceMapper">
 
     <select id="listAllMenuResource" resultType="Resource" resultMap="resourceMap">
-        select t_resource.id,t_resource.name,t_resource.type,t_resource.url,t_resource.available,t_resource.parent_id,t_resource.parent_ids
-        from t_resource where parent_id != null and parent_id>=0 and t_resource.type = 'menu'
+        select t_resource.id,t_resource.name,t_resource.type,t_resource.url,t_resource.available,t_resource.parent_id
+        from t_resource where (parent_id != null or parent_id>=0) and t_resource.type = 'menu'
         order by level,position
     </select>
 
@@ -13,8 +13,7 @@
         <result property="name" column="name"/>
         <result property="type" column="type"/>
         <result property="url" column="available"/>
-        <result property="parent_id" column="parent_id"/>
-        <result property="parent_ids" column="parent_ids"/>
+        <result property="parentId" column="parent_id"/>
         <result property="level" column="level"/>
         <result property="position" column="position"/>
     </resultMap>

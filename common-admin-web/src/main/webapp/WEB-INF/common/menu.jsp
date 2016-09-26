@@ -28,13 +28,18 @@
           <li><a _href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
           <li><a _href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
           <li>
-              <a href="javascript:;">测试菜单</a>
+              <a href="javascript:;">测试菜单二级</a>
               <ul style="display: none">
                 <li><a _href="${pageContext.request.contextPath}/user/list/view">测试权限功能</a> </li>
                 <li>
-                    <a >abcdef</a>
+                    <a >测试菜单三级</a>
                   <ul style="display: none">
-                    <li><a href="">xxx</a> </li>
+                    <li><a >测试菜单四级</a>
+                      <ul style="display: none;">
+                        <li><a href="">测试菜单五级</a></li>
+                      </ul>
+                    </li>
+
                   </ul>
                 </li>
               </ul>

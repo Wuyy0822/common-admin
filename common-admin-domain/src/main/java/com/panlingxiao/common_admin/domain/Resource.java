@@ -79,5 +79,13 @@ public class Resource {
         }
     }
 
+    /**
+     * 判断当前菜单是否是一级菜单
+     * @return
+     */
+    public boolean isFirstMenu(){
+        return parentId == null || parentId <=0;
+    }
+
 
 }

@@ -457,9 +457,6 @@ jQuery.Huifold = function(obj,obj_c,speed,obj_type,Event){
 		$(obj_c+":first").show();
 	}			
 	$(obj).on(Event,function(){
-		console.log($(this));
-		console.log($(this).next());
-		console.log($(this).next().is(":visible"));
 		if($(this).next().is(":visible")){
 			if(obj_type == 2){
 				return false;
