@@ -68,35 +68,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserByUserName(userRequest);
     }
 
-    @Override
-    public User getUserAuthorizationInfo(UserRequest userRequest) {
-        User user = userMapper.getUserAuthorizationInfoById(userRequest.getId());
-        Map<Integer,Resource> resourceMap = new HashMap();
-        if(user != null) {
-           Set<Role> roles = user.getRoles();
-            for(Role role : roles){
-                List<Resource> resources = role.getResources();
-                for(Resource resource : resources){
-                    if(resource.getType() == Resource.ResourceType.menu){
-                        Integer parentId = resource.getParentId();
-                        //判断一级菜单是否存在
-                        if(parentId == null || parentId <=0){
-                            Integer id = resource.getId();
-                            if(!resourceMap.containsKey(id)){
-                                resourceMap.put(id,resource);
-                            }
-                        }else if(resourceMap.containsKey(parentId)){
-                            Resource parent = resourceMap.get(parentId);
-                            parent.addChildren(resource);
-                        }else{
 
-                        }
-                    }
-                }
-            }
-        }
-        return user;
-    }
+
 
 
 }

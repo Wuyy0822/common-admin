@@ -19,14 +19,14 @@ import java.util.Map;
  * Created by panlingxiao on 2016/9/26.
  */
 @Transactional
-@Service
+@Service("resourceService")
 public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private ResourceMapper resourceMapper;
 
     /**
-     * 存储所有的资源到Map中，方便快速的根据ID来进行查找
+     * 存储所有的菜单资源到Map中，方便快速的根据ID来进行查找
      */
     private  Map<Integer, Resource> systemResourceMap;
 
@@ -44,13 +44,17 @@ public class ResourceServiceImpl implements ResourceService {
     @PostConstruct
     public void initSystemResource(){
         long start = System.currentTimeMillis();
-        loadResources();
+        loadSystemResources();
         long end = System.currentTimeMillis();
-        log.info("初始化系统资源成功,耗时{}秒",(end - start)/1000);
+        long initResourceProcessTime = (end - start)/1000;
+        log.info("初始化系统资源成功,耗时{}秒",initResourceProcessTime);
     }
 
-
-    private void loadResources() {
+    /**
+     * 加载系统资源
+     */
+    private void loadSystemResources() {
+        //查询所有的菜单资源
         List<Resource> resources = resourceMapper.listAllMenuResource();
         HashMap<Integer,Resource> resourceMap= new HashMap<>();
         HashMap<Integer,Resource> treeResourceMap = new HashMap<>();
@@ -58,7 +62,9 @@ public class ResourceServiceImpl implements ResourceService {
             resourceMap.put(resource.getId(), resource);
         }
         systemResourceMap = Collections.unmodifiableMap(resourceMap);
-
+        /*
+         * 生成菜单树
+         */
         for (Resource resource : resources) {
             Integer parentId = resource.getParentId();
             Integer id = resource.getId();
@@ -69,10 +75,12 @@ public class ResourceServiceImpl implements ResourceService {
                 if (!treeResourceMap.containsKey(id)) {
                     treeResourceMap.put(id, resource);
                 }
-            }else if (treeResourceMap.containsKey(parentId)) {  //判断当前菜单的父菜单是否存在
+            }else if (treeResourceMap.containsKey(parentId)) {  //判断当前菜单的父菜单是否是一个一级菜单
                 parent = treeResourceMap.get(parentId);
-                parent.addChildren(resource);
-                //判断当前菜单的父菜单是否是一个一级菜单
+                //判断父资源中是否已经包含当前资源,如果未包含则添加
+                if(!parent.hasChildNode(resource)){
+                    parent.addChildNode(resource);
+                }
             }else {
                 putToMapRecursively(resource,treeResourceMap);
             }
@@ -85,6 +93,11 @@ public class ResourceServiceImpl implements ResourceService {
         return null;
     }
 
+    @Override
+    public List<Resource> listResourceByUserId(Integer userId) {
+        return resourceMapper.listResourceByUserId(userId);
+    }
+
     /**
      * 递归获取当前菜单以及其父菜单添加
      * @param resource
@@ -92,14 +105,18 @@ public class ResourceServiceImpl implements ResourceService {
     private void putToMapRecursively(Resource resource,Map<Integer,Resource> treeResourceMap) {
         Integer parentId = resource.getParentId();
         Resource parent = systemResourceMap.get(parentId);
+        //判断当前资源的父资源是否是一级菜单
         if(parent.isFirstMenu()){
             treeResourceMap.put(parentId, parent);
-            parent.addChildren(resource);
         }else{
-            putToMapRecursively(parent,treeResourceMap);
-            parent.addChildren(resource);
+            putToMapRecursively(parent, treeResourceMap);
+        }
+        if(!parent.hasChildNode(resource)) {
+            parent.addChildNode(resource);
         }
     }
+
+
 
     public Map<Integer, Resource> getSystemResourceMap() {
         return systemResourceMap;
@@ -108,4 +125,6 @@ public class ResourceServiceImpl implements ResourceService {
     public Map<Integer, Resource> getSystemTreeResourceMap() {
         return systemTreeResourceMap;
     }
+
+
 }

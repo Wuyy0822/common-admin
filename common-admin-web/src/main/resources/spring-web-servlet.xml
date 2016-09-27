@@ -12,6 +12,9 @@
 	<context:component-scan base-package="com.panlingxiao.common_admin.web.controller"/>
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="com.panlingxiao.common_admin.web.bind.resolver.CurrentUserMethodArgumentResolver"/>
+		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
 
@@ -26,13 +29,6 @@
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 
 
-	<!--启用Shiro注解-->
-	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
-	<!-- the lifecycleBeanProcessor has run: -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager"/>
-	</bean>
-
+	<import resource="spring-web-shiro.xml"/>
 
 </beans>

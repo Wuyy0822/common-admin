@@ -20,9 +20,5 @@ public interface UserMapper {
 
     User getUserByUserName(UserRequest userRequest);
 
-    /**
-     * 根据用户Id查询用户的角色和用户的权限
-     * @param id
-     */
-    User getUserAuthorizationInfoById(Integer id);
+
 }

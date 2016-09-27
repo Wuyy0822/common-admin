@@ -27,4 +27,11 @@ public interface ResourceService {
      * @return 返回的Map是一个只读的Map,不能修改
      */
     Map<Integer, Resource> getSystemTreeResourceMap();
+
+    /**
+     *  根据用户ID查询该用户所能访问的所有资源
+     * @param userId 用户Id
+     * @return 用户所有的资源
+     */
+    List<Resource> listResourceByUserId(Integer userId);
 }

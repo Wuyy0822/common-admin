@@ -6,48 +6,58 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="common-tag.jsp"%>
 <aside class="Hui-aside">
   <input runat="server" id="divScrollValue" type="hidden" />
-  <div class="menu_dropdown bk_2">
-    <dl id="menu-member">
-      <dt>
-        <i class="Hui-iconfont">&#xe60d;</i>
-        系统管理
-        <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-      </dt>
-      <dd>
-        <ul>
 
-            <li><a _href="${pageContext.request.contextPath}/user/list/view" data-title="用户列表" href="javascript:;">用户管理</a></li>
-            <li><a _href="member-del.html" data-title="删除的用户" href="javascript:;">角色管理</a></li>
-          <li><a _href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
-          <li><a _href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
-          <li><a _href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
-          <li><a _href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-          <li><a _href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
-          <li>
-              <a href="javascript:;">测试菜单二级</a>
-              <ul style="display: none">
-                <li><a _href="${pageContext.request.contextPath}/user/list/view">测试权限功能</a> </li>
-                <li>
-                    <a >测试菜单三级</a>
-                  <ul style="display: none">
-                    <li><a >测试菜单四级</a>
-                      <ul style="display: none;">
-                        <li><a href="">测试菜单五级</a></li>
-                      </ul>
-                    </li>
+  <%--<div class="menu_dropdown bk_2">--%>
 
-                  </ul>
-                </li>
-              </ul>
-          </li>
-        </ul>
-      </dd>
-    </dl>
+
+    <%--<dl id="menu-member">--%>
+      <%--<dt>--%>
+        <%--<i class="Hui-iconfont">&#xe60d;</i>系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>--%>
+      <%--</dt>--%>
+      <%--<dd>--%>
+        <%--<ul>--%>
+          <%--<li><a _href="${pageContext.request.contextPath}/user/list/view" data-title="用户列表" href="javascript:;">用户管理</a></li>--%>
+          <%--<li><a _href="member-del.html" data-title="删除的用户" href="javascript:;">角色管理</a></li>--%>
+          <%--<li><a _href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>--%>
+          <%--<li><a _href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>--%>
+          <%--<li><a _href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>--%>
+          <%--<li><a _href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>--%>
+          <%--<li><a _href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>--%>
+          <%--<li>--%>
+              <%--<a href="javascript:;">测试菜单二级</a>--%>
+              <%--<ul>--%>
+                <%--<li><a _href="${pageContext.request.contextPath}/user/list/view">测试权限功能</a> </li>--%>
+                <%--<li>--%>
+                    <%--<a >测试菜单三级</a>--%>
+                  <%--<ul >--%>
+                    <%--<li><a >测试菜单四级</a>--%>
+                      <%--<ul>--%>
+                        <%--<li><a href="">测试菜单五级</a></li>--%>
+                      <%--</ul>--%>
+                    <%--</li>--%>
+                  <%--</ul>--%>
+                <%--</li>--%>
+              <%--</ul>--%>
+          <%--</li>--%>
+        <%--</ul>--%>
+      <%--</dd>--%>
+    <%--</dl>--%>
+
     <%--<dl id="menu-product">--%>
+      <%--<dt>--%>
+        <%--<a _href="product-category.html" data-title="分类管理" href="javascript:void(0)"> <i class="Hui-iconfont">&#xe60d;</i>分类管理</a>--%>
+      <%--</dt>--%>
+    <%--</dl>--%>
+
+
+
+
+
+
+  <%--<dl id="menu-product">--%>
       <%--<dt><i class="Hui-iconfont">&#xe620;</i>商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>--%>
       <%--<dd>--%>
         <%--<ul>--%>
@@ -57,6 +67,7 @@
         <%--</ul>--%>
       <%--</dd>--%>
     <%--</dl>--%>
+
 
 
     <%--<dl id="menu-article">--%>
@@ -129,5 +140,11 @@
     <%--</dl>--%>
 
 
-  </div>
+  <%--</div>--%>
+
+
+   <plx:menu/>
+
+
+
 </aside>

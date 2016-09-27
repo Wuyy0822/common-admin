@@ -70,19 +70,7 @@ public class UserServiceImplTest {
         System.out.println(user.getRoleIds());
     }
 
-    /**
-     * 获取用户的授权信息
-     */
-    @Test
-    public void testGetUserAuthorizationInfo(){
-        UserRequest userRequest = new UserRequest();
-        userRequest.setId(1);
-        User user = userService.getUserAuthorizationInfo(userRequest);
-        Set<Role> roles = user.getRoles();
-        for(Role role : roles){
-            System.out.println(role);
-        }
-    }
+
 
     /**
      * 参考PageHelper的单元测试

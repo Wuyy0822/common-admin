@@ -51,27 +51,12 @@
     </resultMap>
 
 
-    <!--根据用户Id查询用户的授权信息-->
-    <select id="getUserAuthorizationInfoById" resultMap="userAuthorizationInfoMap" parameterType="userRequest">
-          SELECT
-          t_user.id     AS user_id,
-          t_role.id     AS role_id,
-          t_role.name   AS role_name,
-          t_role.description,
-          t_role.available,
-          t_role.resource_ids,
-          t_resource.id AS resource_id,
-          t_resource.name as resource_name,
-          t_resource.type,
-          t_resource.url,
-          t_resource.parent_id,
-          t_resource.permission
-        FROM t_user
-          JOIN t_role ON t_user.id = #{id} AND find_in_set(t_role.id, t_user.role_ids)
-          JOIN t_resource ON find_in_set(t_resource.id, t_role.resource_ids)
+
+    <select id="listUserResourceById" resultMap="userResourceMap" parameterType="userRequest">
+
     </select>
 
-    <resultMap id="userAuthorizationInfoMap" type="user">
+    <resultMap id="userResourceMap" type="user">
         <id column="user_id" property="id"/>
         <collection property="roles" ofType="Role">
             <id property="id" column="role_id"/>

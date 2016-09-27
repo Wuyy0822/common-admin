@@ -14,4 +14,10 @@ public interface ResourceMapper {
      * @return
      */
     List<Resource> listAllMenuResource();
+
+    /**
+     * 根据用户Id查询用户的所有权限
+     * @param id
+     */
+    List<Resource> listResourceByUserId(Integer id);
 }

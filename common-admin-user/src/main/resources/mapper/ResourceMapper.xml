@@ -3,7 +3,17 @@
 <mapper namespace="com.panlingxiao.common_admin.mapper.user.ResourceMapper">
 
     <select id="listAllMenuResource" resultType="Resource" resultMap="resourceMap">
-        select t_resource.id,t_resource.name,t_resource.type,t_resource.url,t_resource.available,t_resource.parent_id
+        select
+          t_resource.id,
+          t_resource.name,
+          t_resource.type,
+          t_resource.url,
+          t_resource.permission,
+          t_resource.available,
+          t_resource.parent_id,
+          t_resource.level,
+          t_resource.position,
+          t_resource.parent_ids
         from t_resource where (parent_id != null or parent_id>=0) and t_resource.type = 'menu'
         order by level,position
     </select>
@@ -13,10 +23,29 @@
         <result property="name" column="name"/>
         <result property="type" column="type"/>
         <result property="url" column="available"/>
+        <result property="permission" column="permission"/>
         <result property="parentId" column="parent_id"/>
         <result property="level" column="level"/>
         <result property="position" column="position"/>
+        <result property="parentIds" column="parent_ids"/>
     </resultMap>
+
+    <!--根据用户Id查询用户的所有资源-->
+    <select id="listResourceByUserId" parameterType="Integer" resultMap="resourceMap">
+          select
+          t_resource.id as id,
+          t_resource.name as name,
+          t_resource.type,
+          t_resource.url,
+          t_resource.permission,
+          t_resource.parent_id,
+          t_resource.level,
+          t_resource.position,
+          t_resource.parent_ids
+        from t_user
+          join t_role on t_user.id = #{id} and find_in_set(t_role.id, t_user.role_ids)
+          join t_resource on find_in_set(t_resource.id, t_role.resource_ids)
+    </select>
 
 
 </mapper>

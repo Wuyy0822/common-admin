@@ -5,7 +5,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by panlingxiao on 2016/9/25.
@@ -49,6 +51,8 @@ public class Resource {
 
     private List<Resource> children;
 
+    private Map<Integer,Resource> childrenNode;
+
     /**
      * 资源的级别,只针对菜单有效
      */
@@ -59,11 +63,30 @@ public class Resource {
      */
     private int position;
 
+    /**
+     * 资源对应的图标
+     */
+    private String icon;
+
     public void addChildren(Resource resource) {
         if(children == null){
             children = new ArrayList<>();
         }
         children.add(resource);
+    }
+
+    public void addChildNode(Resource resource){
+        if(childrenNode == null){
+           childrenNode =  new HashMap<>();
+        }
+        childrenNode.put(resource.getId(), resource);
+    }
+
+    public boolean hasChildNode(Resource resource) {
+        if(children == null){
+            return false;
+        }
+        return childrenNode.containsKey(resource.getId());
     }
 
     public static enum ResourceType {
